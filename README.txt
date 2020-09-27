@@ -1,2 +1,2 @@
-## TicTacToeGame by written by Sagar Rashinkar
+## TicTacToeGame written by Sagar Rashinkar
 
