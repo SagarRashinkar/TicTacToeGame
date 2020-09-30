@@ -1,8 +1,13 @@
 import java.util.Scanner;
 import java.util.Random;
+import java.util.ArrayList;
 
 class TicTacToeGame{
 
+	static ArrayList<Integer> userPosition = new ArrayList<Integer>();
+	static ArrayList<Integer> cpuPosition = new ArrayList<Integer>();
+
+	String user,cpu;
 	static char userSymbol;
 	static char cpuSymbol;
 	static int userPos, cpuPos;
@@ -55,16 +60,34 @@ class TicTacToeGame{
 		
 			System.out.println("enter position: ");
 			userPos = sc.nextInt();
-			placePiece(board, userPos, userSymbol);
+			while(userPosition.contains(userPos) || cpuPosition.contains(userPos)){
+			
+				System.out.println("position is already taken please choose another");
+				userPos = sc.nextInt();
+			}
+			placePiece(board, userPos, userSymbol, "user");
 
 			cpuPos = rand.nextInt(9)+1;
-			placePiece(board, cpuPos, cpuSymbol);
+			while(userPosition.contains(cpuPos) || cpuPosition.contains(cpuPos)){
+			
+				cpuPos = rand.nextInt(9)+1;
+			}
+			placePiece(board, cpuPos, cpuSymbol, "cpu");
 			printBoard(board);
 		}
 	}
 
-	public void placePiece(char[][] board, int pos, char symbol){
+	public void placePiece(char[][] board, int pos, char symbol, String player){
 	
+		if(player.equals("user")){
+		
+			userPosition.add(pos);
+		}
+		else if(player.equals("cpu")){
+		
+			cpuPosition.add(pos);
+		}
+
 		switch(pos){
 		
 			case 1:
